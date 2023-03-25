@@ -7,7 +7,7 @@ event.preventDefault();
 const name=nameInput.value;
 const email=emailInput.value;
 const phone=phoneInput.value;
-fetch('https://example.com/api/get-user?email=${email}').then(response => {
+fetch('https://test-api-v3.myways.ai/user?email=').then(response => {
 if(response.ok){
 return response.json();
 }
@@ -17,7 +17,7 @@ throw new Error('Network response was not ok');
 }).then(data => {
 alert('User found');
 }).catch(error=> {
-fetch('https://example.com/api/create-user',{
+fetch('https://test-api-v3.myways.ai/user',{
 method: 'POST',
 body: JSON.stringify({ name,email,phone}),
 headers:{
