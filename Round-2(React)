@@ -1,0 +1,81 @@
+npm install axios
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+
+function DisneyCharacters() {
+  const [characters, setCharacters] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get('https://disneyapi.dev/characters')
+      .then((response) => setCharacters(response.data))
+      .catch((error) => console.log(error));
+  }, []);
+
+  return (
+    <div>
+      {/* Display characters data here */}
+    </div>
+  );
+}
+
+export default DisneyCharacters;
+function DisneyCharacters() {
+  const [characters, setCharacters] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get('https://disneyapi.dev/characters')
+      .then((response) => setCharacters(response.data))
+      .catch((error) => console.log(error));
+  }, []);
+
+  return (
+    <div>
+      {characters.map((character) => (
+        <div key={character.id}>
+          <h2>{character.name}</h2>
+          <img src={character.image} alt={character.name} />
+          <p>{character.description}</p>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+export default DisneyCharacters;
+function DisneyCharacters() {
+  const [characters, setCharacters] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
+
+  useEffect(() => {
+    axios
+      .get('https://disneyapi.dev/characters')
+      .then((response) => setCharacters(response.data))
+      .catch((error) => console.log(error));
+  }, []);
+
+  const filteredCharacters = characters.filter((character) =>
+    character.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  return (
+    <div>
+      <input
+        type="text"
+        placeholder="Search for a character"
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+      />
+      {filteredCharacters.map((character) => (
+        <div key={character.id}>
+          <h2>{character.name}</h2>
+          <img src={character.image} alt={character.name} />
+          <p>{character.description}</p>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+export default DisneyCharacters;
